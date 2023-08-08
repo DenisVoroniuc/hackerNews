@@ -1,11 +1,11 @@
 import React from "react";
 
-import { Routing } from "pages";
+import { Pages } from "pages";
 
 const App = () => {
   return (
     <div className="app">
-      <Routing />
+      <Pages />
     </div>
   );
 };
