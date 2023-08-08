@@ -5,19 +5,17 @@ import type { Story as IStory } from "shared/api";
 
 export const Meta = ({ article }: { article: IStory }) => {
   const { by, time, type } = article;
-
+  if (!by) {
+    return null;
+  }
   const date = utils.date.createDate(time);
   return (
-    <>
-      {by && (
-        <Card>
-          <Card.Meta
-            avatar={<Avatar size={64} icon={<UserOutlined />} />}
-            title={`${by} ${date}`}
-            description={`type ${type}`}
-          />
-        </Card>
-      )}
-    </>
+    <Card>
+      <Card.Meta
+        avatar={<Avatar size={64} icon={<UserOutlined />} />}
+        title={`${by} ${date}`}
+        description={`type ${type}`}
+      />
+    </Card>
   );
 };

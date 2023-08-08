@@ -1,8 +1,10 @@
+type GenericId<T extends number = number> = T;
+
 export type Story = {
   by: string;
   descendants: number;
-  id: number;
-  kids: Array<number>;
+  id: GenericId;
+  kids: Array<GenericId> | undefined;
   score: number;
   time: number;
   title: string;
@@ -13,8 +15,8 @@ export type Story = {
 export type Comment = {
   by: string;
   descendants: number;
-  id: number;
-  kids: Array<number>;
+  id: GenericId;
+  kids: Array<GenericId> | undefined;
   score: number;
   time: number;
   title: string;

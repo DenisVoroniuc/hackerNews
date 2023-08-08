@@ -7,6 +7,7 @@ import { Meta } from "./meta";
 
 export const Story = ({ storyId }: { storyId: number }) => {
   const [story, setStory] = useState<IStory | undefined>();
+
   useEffect(() => {
     getStoryById({ storyId }).then(r => {
       if (r.data && r.data.url) {
@@ -14,14 +15,17 @@ export const Story = ({ storyId }: { storyId: number }) => {
       }
     });
   }, []);
+
   if (!story) {
-    return <></>;
+    return null;
   }
 
   const { title, kids, id, url } = story;
+
   if (!url) {
-    return <></>;
+    return null;
   }
+
   return (
     <Collapse>
       <Collapse.Panel
