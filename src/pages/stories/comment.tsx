@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import { getCommentById } from "shared/api/hackerNews/stories";
 import { utils } from "shared/ui";
 import { Meta } from "./meta";
+import type { Comment as IComment } from "shared/api";
 
-export const Comment = ({ commentId }: any) => {
+export const Comment = ({ commentId }: { commentId: IComment["id"] }) => {
   const [comment, setComment] = useState<any>({});
 
   useEffect(() => {

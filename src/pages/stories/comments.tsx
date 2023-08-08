@@ -1,17 +1,25 @@
 import { Card } from "antd";
 import { Comment } from "./comment";
+import { Collapse } from "antd";
+import type { Comment as IComment } from "shared/api";
 
-export const Comments = ({ commentIds }: any) => {
+export type Props = {
+  commentIds: Array<IComment["id"]>;
+};
+
+export const Comments = ({ commentIds }: Props) => {
   return (
     <Card>
-      {commentIds.map(
-        (id: any) =>
-          id && (
-            <div key={id}>
-              <Comment commentId={id} />
-            </div>
-          ),
-      )}
+      <Collapse defaultActiveKey={commentIds}>
+        {commentIds.map(
+          (id: any) =>
+            id && (
+              <Collapse.Panel key={id} header={"Comments"}>
+                <Comment commentId={id} />
+              </Collapse.Panel>
+            ),
+        )}
+      </Collapse>
     </Card>
   );
 };

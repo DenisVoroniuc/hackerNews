@@ -1,12 +1,11 @@
-import { type } from "@testing-library/user-event/dist/type";
 import { Collapse, Typography } from "antd";
-import { ReactElement, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { getStoryById } from "shared/api/hackerNews/stories";
 import type { Story as IStory } from "shared/api";
 import { Comments } from "./comments";
 import { Meta } from "./meta";
 
-export const Story = ({ storyId }: { storyId: number }): ReactElement<any, any> => {
+export const Story = ({ storyId }: { storyId: number }) => {
   const [story, setStory] = useState<IStory | undefined>();
   useEffect(() => {
     getStoryById({ storyId }).then(r => {

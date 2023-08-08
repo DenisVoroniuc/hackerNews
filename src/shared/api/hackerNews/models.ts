@@ -10,5 +10,14 @@ export type Story = {
   url: string;
 };
 
-//TODO: better types
-export type Comment = any;
+export type Comment = {
+  by: string;
+  descendants: number;
+  id: number;
+  kids: Array<number>;
+  score: number;
+  time: number;
+  title: string;
+  type: "comment";
+  url: string;
+};
