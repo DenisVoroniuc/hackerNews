@@ -2,8 +2,6 @@ import React from "react";
 
 import { Routing } from "pages";
 
-import { withProviders } from "./providers";
-
 const App = () => {
   return (
     <div className="app">
@@ -12,4 +10,4 @@ const App = () => {
   );
 };
 
-export default withProviders(App);
+export default App;

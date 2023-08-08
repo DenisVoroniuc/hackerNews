@@ -13,9 +13,7 @@ export type getStoryByIdParams = {
   storyId: number;
 };
 
-export const getStoryById = ({
-  storyId,
-}: getStoryByIdParams): AxiosPromise<Story> => {
+export const getStoryById = ({ storyId }: getStoryByIdParams): AxiosPromise<Story> => {
   return apiInstance.get(`${itemUrl}/${storyId}.json`);
 };
 
@@ -23,10 +21,6 @@ export type getCommentByIdParams = {
   commentId: number;
 };
 
-export const getCommentById = ({
-  commentId,
-}: getCommentByIdParams): AxiosPromise<Comment> => {
-  console.log(commentId);
-
+export const getCommentById = ({ commentId }: getCommentByIdParams): AxiosPromise<Comment> => {
   return apiInstance.get(`${itemUrl}/${commentId}.json`);
 };

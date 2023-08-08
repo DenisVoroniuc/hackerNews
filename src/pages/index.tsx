@@ -1,36 +1,26 @@
-import { Routes, Route } from "react-router";
 import { ReactElement, useEffect, useState } from "react";
-import {
-  getCommentById,
-  getStoriesIdList,
-  getStoryById,
-} from "shared/api/hackerNews/stories";
+import { getCommentById, getStoriesIdList, getStoryById } from "shared/api/hackerNews/stories";
 import { Avatar, Card, Collapse, Typography } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
 import type { Story as IStory } from "shared/api";
 import { utils } from "shared/ui";
 
 export const Routing = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Stories />} />
-    </Routes>
-  );
+  return <Stories />;
 };
 
 export const Stories = () => {
   const [storyIds, setStoryIds] = useState<number[] | undefined>(undefined);
 
   useEffect(() => {
-    getStoriesIdList().then((r) => setStoryIds(r.data));
+    getStoriesIdList().then(r => setStoryIds(r.data));
   }, []);
   if (!storyIds) {
     return null;
   }
   return (
     <>
-      {storyIds.slice(0, 12).map((storyId) => (
+      {storyIds.slice(0, 30).map(storyId => (
         <Story key={storyId} storyId={storyId} />
       ))}
     </>
@@ -40,7 +30,7 @@ export const Stories = () => {
 const Story = ({ storyId }: { storyId: number }): ReactElement<any, any> => {
   const [story, setStory] = useState<IStory | undefined>();
   useEffect(() => {
-    getStoryById({ storyId }).then((r) => {
+    getStoryById({ storyId }).then(r => {
       if (r.data && r.data.url) {
         setStory(r.data);
       }
@@ -59,13 +49,9 @@ const Story = ({ storyId }: { storyId: number }): ReactElement<any, any> => {
       <Collapse.Panel
         header={
           <Typography.Text type="secondary">
-            <Link
-              style={{ color: "inherit", textDecoration: "none" }}
-              target="_blank"
-              to={url}
-            >
+            <a style={{ color: "inherit", textDecoration: "none" }} target="_blank" href={url}>
               {title}
-            </Link>
+            </a>
           </Typography.Text>
         }
         key={id}
@@ -88,7 +74,7 @@ export const Comments = ({ commentIds }: any) => {
             <div key={id}>
               <Comment commentId={id} />
             </div>
-          )
+          ),
       )}
     </Card>
   );
@@ -97,9 +83,7 @@ export const Comment = ({ commentId }: any) => {
   const [comment, setComment] = useState<any>({});
 
   useEffect(() => {
-    getCommentById({ commentId }).then(
-      ({ data }) => data && data.type && setComment(data)
-    );
+    getCommentById({ commentId }).then(({ data }) => data && data.type && setComment(data));
   }, []);
 
   return (
@@ -107,35 +91,28 @@ export const Comment = ({ commentId }: any) => {
       {comment && !comment.deleted && (
         <>
           <Meta article={comment} />
-          <Typography
-            dangerouslySetInnerHTML={utils.html.createMarkup(comment.text)}
-          />
+          <Typography dangerouslySetInnerHTML={utils.html.createMarkup(comment.text)} />
           {comment.kids && <Comments commentIds={comment.kids} />}
         </>
       )}
     </div>
   );
 };
-export const Meta = ({ article: { by, time } }: { article: IStory }) => {
-  const date = new Date(time * 1000).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+
+export const Meta = ({ article }: { article: IStory }) => {
+  const { by, time, type } = article;
+
+  const date = utils.date.createDate(time);
   return (
     <>
       {by && (
-        <>
-          <Card>
-            <Card.Meta
-              avatar={<Avatar size={64} icon={<UserOutlined />} />}
-              title={`${by} ${date}`}
-              description="This is the description"
-            />
-          </Card>
-        </>
+        <Card>
+          <Card.Meta
+            avatar={<Avatar size={64} icon={<UserOutlined />} />}
+            title={`${by} ${date}`}
+            description={`type ${type}`}
+          />
+        </Card>
       )}
     </>
   );

@@ -17,8 +17,6 @@
     "react-dom": "^18.2.0",
     "react-query": "^3.34.16",
     "react-redux": "^8.1.0",
-    "react-router": "^6.2.1",
-    "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.1",
     "sass": "^1.49.8",
     "web-vitals": "^2.1.4"
@@ -27,6 +25,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "prettier:write": "prettier --config .prettierrc --write \"**/*.*\"",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -55,6 +54,7 @@
     "@types/react-dom": "^18.2.4",
     "@types/react-router": "^5.1.14",
     "@types/react-router-dom": "^5.1.7",
+    "prettier": "^3.0.0",
     "typescript": "^4.9.5"
   }
 }
