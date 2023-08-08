@@ -26,6 +26,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "prettier:write": "prettier --config .prettierrc --write \"**/*.*\"",
+    "tsc": "tsc -p tsconfig-check.json",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
